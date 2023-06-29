@@ -45,7 +45,6 @@ local function Count(Name,Model)
 end
 
 getgenv().GrabItems = function(Springs,Blades,Gears)
-    local YLevel = 0
     local OP = Character.HumanoidRootPart.CFrame
     repeat
         task.wait(1)
@@ -55,7 +54,7 @@ getgenv().GrabItems = function(Springs,Blades,Gears)
                 task.wait()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
                 task.wait()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,YLevel,v[2].Position.Z))
+                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
                 task.wait()
                 Character.PrimaryPart.CFrame = v[2].CFrame
                 wait(0.7)
@@ -65,7 +64,7 @@ getgenv().GrabItems = function(Springs,Blades,Gears)
                 task.wait()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
                 task.wait()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,YLevel,v[2].Position.Z))
+                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
                 task.wait()
                 Character.PrimaryPart.CFrame = v[2].CFrame
                 wait(0.7)
@@ -75,7 +74,7 @@ getgenv().GrabItems = function(Springs,Blades,Gears)
                 task.wait()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
                 task.wait()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,YLevel,v[2].Position.Z))
+                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
                 task.wait()
                 Character.PrimaryPart.CFrame = v[2].CFrame
                 wait(0.7)
