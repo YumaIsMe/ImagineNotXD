@@ -4,7 +4,6 @@ local V3 = Vector3.new
 local FPP = fireproximityprompt
 local Loot = {}
 local LootSpawns = game:GetService("Workspace").SpawnsLoot
-local TweenService = game:GetService("TweenService")
 
 local Teleporting = false
 
@@ -47,37 +46,37 @@ end
 getgenv().GrabItems = function(Springs,Blades,Gears)
     local OP = Character.HumanoidRootPart.CFrame
     repeat
-        task.wait(1)
+        task.delay(0.1)
         local LootTBL = GetLoot()
         for _,v in pairs(LootTBL) do
             if v[1] == "Spring" and Count("Spring",LocalPlayer.Backpack) < Springs and Springs > 0 then
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = v[2].CFrame
-                wait(0.7)
+                task.delay(0.07)
                 FPP(v[2].Parent.Part.Attachment.ProximityPrompt,1)
             end
             if v[1] == "Blade" and Count("Blade",LocalPlayer.Backpack) < Blades and Blades > 0 then
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = v[2].CFrame
-                wait(0.7)
+                task.delay(0.07)
                 FPP(v[2].Parent.Part.Attachment.ProximityPrompt,1)
             end
             if v[1] == "Gear" and Count("Gear",LocalPlayer.Backpack) < Gears and Gears > 0 then
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
-                task.wait()
+                task.delay()
                 Character.PrimaryPart.CFrame = v[2].CFrame
-                wait(0.7)
+                task.delay(0.07)
                 FPP(v[2].Parent.Part.Attachment.ProximityPrompt,1)
             end
         end
