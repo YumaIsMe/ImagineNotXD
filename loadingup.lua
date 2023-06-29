@@ -45,7 +45,7 @@ local function Count(Name,Model)
 end
 
 getgenv().GrabItems = function(Springs,Blades,Gears)
-    local YLevel = -54
+    local YLevel = 0
     local OP = Character.HumanoidRootPart.CFrame
     repeat
         task.wait(1)
