@@ -12,7 +12,7 @@ local function TPTo(Position)
     print("TPTo called.")
 
     if typeof(Position) == "Instance" then
-        Position = Position.HumanoidRootPart.CFrame
+        Position = Position.CFrame
     end
 
     if typeof(Position) == "Vector3" then
@@ -72,24 +72,27 @@ getgenv().GrabItems = function(Springs, Blades, Gears)
         local LootTBL = GetLoot()
         for _, v in pairs(LootTBL) do
             if v[1] == "Spring" and Count("Spring", LocalPlayer.Backpack) < Springs and Springs > 0 then
-                task.wait(TPTo(v[2]))
+                task.wait(TPTo(v[2].CFrame))
                 wait(0.7)
                 FPP(v[2].Parent.Part.Attachment.ProximityPrompt, 1)
             end
             if v[1] == "Blade" and Count("Blade", LocalPlayer.Backpack) < Blades and Blades > 0 then
-                task.wait(TPTo(v[2]))
+                task.wait(TPTo(v[2].CFrame))
                 wait(0.7)
                 FPP(v[2].Parent.Part.Attachment.ProximityPrompt, 1)
             end
             if v[1] == "Gear" and Count("Gear", LocalPlayer.Backpack) < Gears and Gears > 0 then
-                task.wait(TPTo(v[2]))
+                task.wait(TPTo(v[2].CFrame))
                 wait(0.7)
                 FPP(v[2].Parent.Part.Attachment.ProximityPrompt, 1)
             end
         end
-        TPTo(V3(145, 30, -162))
+        TPTo(CFrame.new(145, 30, -162))
         OP = Character.HumanoidRootPart.CFrame
-    until Count("Gear", LocalPlayer.Backpack) >= Gears and Count("Blade", LocalPlayer.Backpack) >= Blades and Count("Spring", LocalPlayer.Backpack) >= Springs
+    until
+        Count("Gear", LocalPlayer.Backpack) >= Gears and
+        Count("Blade", LocalPlayer.Backpack) >= Blades and
+        Count("Spring", LocalPlayer.Backpack) >= Springs
 
     wait(TPTo(OP))
 end
