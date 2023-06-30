@@ -53,6 +53,16 @@ local function GetLoot()
     return LootT
 end
 
+local function Count(Name, Model)
+    local count = 0
+    for _, v in pairs(Model:GetChildren()) do
+        if v.Name == Name then
+            count = count + 1
+        end
+    end
+    return count
+end
+
 getgenv().GrabItems = function(Springs, Blades, Gears)
     local YLevel = -54
     local OP = Character.HumanoidRootPart.CFrame
