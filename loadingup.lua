@@ -1,41 +1,62 @@
+-- Variables
 local LocalPlayer = game.Players.LocalPlayer
 local Character = LocalPlayer.Character
 local V3 = Vector3.new
 local FPP = fireproximityprompt
 local Loot = {}
 local LootSpawns = game:GetService("Workspace").SpawnsLoot
+local TweenService = game:GetService("TweenService")
 
 local Teleporting = false
 
+local function TPTo(Position)
+    print("TPTo called.")
+
+    if typeof(Position) == "Instance" then
+        Position = Position.PrimaryPart.CFrame
+    end
+
+    if typeof(Position) == "Vector3" then
+        Position = CFrame.new(Position)
+    end
+
+    if typeof(Position) ~= "CFrame" then
+        warn("[!] Invalid Argument Passed to TP()")
+    else
+        LocalPlayer.Character:PivotTo(Position)
+        return 0
+    end
+end
+
 local function CheckLoot(Model)
-    for i,v in pairs(Model:GetChildren()) do
+    for i, v in pairs(Model:GetChildren()) do
         if v.Name == "Spring" and v.Transparency == 0 then
-            return "Spring",v
+            return "Spring", v
         elseif v.Name == "Gear" and v.Transparency == 0 then
-            return "Gear",v
+            return "Gear", v
         elseif v.Name == "Blade" and v.Transparency == 0 then
-            return "Blade",v
+            return "Blade", v
         end
     end
-    return false,nil
+    return false, nil
 end
 
 local function GetLoot()
     local LootT = {}
 
-    for _,LootSpawn in pairs(LootSpawns:GetChildren()) do
-        local Loot,Model = CheckLoot(LootSpawn)
+    for _, LootSpawn in pairs(LootSpawns:GetChildren()) do
+        local Loot, Model = CheckLoot(LootSpawn)
         if Loot then
-            table.insert(LootT,{Loot,Model})
+            table.insert(LootT, {Loot, Model})
         end
     end
 
     return LootT
 end
 
-local function Count(Name,Model)
+local function Count(Name, Model)
     local count = 0
-    for i,v in pairs(Model:GetChildren()) do
+    for i, v in pairs(Model:GetChildren()) do
         if v.Name == Name then
             count = count + 1
         end
@@ -43,47 +64,39 @@ local function Count(Name,Model)
     return count
 end
 
-getgenv().GrabItems = function(Springs,Blades,Gears)
-    local OP = Character.HumanoidRootPart.CFrame
+getgenv().GrabItems = function(Springs, Blades, Gears)
+    local YLevel = -54
+    local OP = Character.PrimaryPart.CFrame
+
     repeat
-        task.delay(0.1)
+        task.wait(1)
         local LootTBL = GetLoot()
-        for _,v in pairs(LootTBL) do
-            if v[1] == "Spring" and Count("Spring",LocalPlayer.Backpack) < Springs and Springs > 0 then
-                task.delay()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
-                task.delay()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
-                task.delay()
-                Character.PrimaryPart.CFrame = v[2].CFrame
-                task.delay(0.07)
-                FPP(v[2].Parent.Part.Attachment.ProximityPrompt,1)
+        for _, v in pairs(LootTBL) do
+            if v[1] == "Spring" and Count("Spring", LocalPlayer.Backpack) < Springs and Springs > 0 then
+                task.wait(TPTo(CFrame.new(Vector3.new(OP.Position.X, YLevel, OP.Position.Z))))
+                task.wait(TPTo(CFrame.new(Vector3.new(v[2].PrimaryPart.Position.X, YLevel, v[2].PrimaryPart.Position.Z))))
+                task.wait(TPTo(v[2].PrimaryPart.CFrame))
+                wait(0.7)
+                FPP(v[2].PrimaryPart.Attachment.ProximityPrompt, 1)
             end
-            if v[1] == "Blade" and Count("Blade",LocalPlayer.Backpack) < Blades and Blades > 0 then
-                task.delay()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
-                task.delay()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
-                task.delay()
-                Character.PrimaryPart.CFrame = v[2].CFrame
-                task.delay(0.07)
-                FPP(v[2].Parent.Part.Attachment.ProximityPrompt,1)
+            if v[1] == "Blade" and Count("Blade", LocalPlayer.Backpack) < Blades and Blades > 0 then
+                task.wait(TPTo(CFrame.new(Vector3.new(OP.Position.X, YLevel, OP.Position.Z))))
+                task.wait(TPTo(CFrame.new(Vector3.new(v[2].PrimaryPart.Position.X, YLevel, v[2].PrimaryPart.Position.Z))))
+                task.wait(TPTo(v[2].PrimaryPart.CFrame))
+                wait(0.7)
+                FPP(v[2].PrimaryPart.Attachment.ProximityPrompt, 1)
             end
-            if v[1] == "Gear" and Count("Gear",LocalPlayer.Backpack) < Gears and Gears > 0 then
-                task.delay()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(OP.Position.X,YLevel,OP.Position.Z))
-                task.delay()
-                Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(v[2].Position.X,v[2]YLevel,v[2].Position.Z))
-                task.delay()
-                Character.PrimaryPart.CFrame = v[2].CFrame
-                task.delay(0.07)
-                FPP(v[2].Parent.Part.Attachment.ProximityPrompt,1)
+            if v[1] == "Gear" and Count("Gear", LocalPlayer.Backpack) < Gears and Gears > 0 then
+                task.wait(TPTo(CFrame.new(Vector3.new(OP.Position.X, YLevel, OP.Position.Z))))
+                task.wait(TPTo(CFrame.new(Vector3.new(v[2].PrimaryPart.Position.X, YLevel, v[2].PrimaryPart.Position.Z))))
+                task.wait(TPTo(v[2].PrimaryPart.CFrame))
+                wait(0.7)
+                FPP(v[2].PrimaryPart.Attachment.ProximityPrompt, 1)
             end
         end
-        Character.PrimaryPart.CFrame = CFrame.new(Vector3.new(145, 30, -162))
-        OP = Character.HumanoidRootPart.CFrame
-    until Count("Gear",LocalPlayer.Backpack) >= Gears and Count("Blade",LocalPlayer.Backpack) >= Blades and Count("Spring",LocalPlayer.Backpack) >= Springs
+        TPTo(Vector3.new(145, 30, -162))
+        OP = Character.PrimaryPart.CFrame
+    until Count("Gear", LocalPlayer.Backpack) >= Gears and Count("Blade", LocalPlayer.Backpack) >= Blades and Count("Spring", LocalPlayer.Backpack) >= Springs
     
-    wait()
-    Character.PrimaryPart.CFrame = OP
+    wait(TPTo(OP))
 end
