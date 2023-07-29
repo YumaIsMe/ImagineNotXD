@@ -5,6 +5,7 @@ local V3 = Vector3.new
 local FPP = fireproximityprompt
 local LootSpawns = game:GetService("Workspace").SpawnsLoot
 local TweenService = game:GetService("TweenService")
+local StartingPosition = Character.HumanoidRootPart.CFrame
 
 local Teleporting = false
 
@@ -100,5 +101,5 @@ getgenv().GrabItems = function(Springs, Blades, Gears)
         OP = Character.HumanoidRootPart.CFrame
     until Count("Gear", LocalPlayer.Backpack) >= Gears and Count("Blade", LocalPlayer.Backpack) >= Blades and Count("Spring", LocalPlayer.Backpack) >= Springs
 
-    wait(TPTo(OP))
+    wait(TPTo(StartingPosition))
 end
