@@ -97,7 +97,7 @@ getgenv().GrabItems = function(Springs, Blades, Gears)
             end
         end
 
-        TPTo(Vector3.new(145, 30, -162))
+        TPTo(Vector3.new(StartingPosition))
         OP = Character.HumanoidRootPart.CFrame
     until Count("Gear", LocalPlayer.Backpack) >= Gears and Count("Blade", LocalPlayer.Backpack) >= Blades and Count("Spring", LocalPlayer.Backpack) >= Springs
 
